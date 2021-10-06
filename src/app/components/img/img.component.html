@@ -1,2 +1,6 @@
-<p>img works!</p>
-<p>{{img}}</p>
+<!--verificamos si la imagen viene vacia *ngIf-->
+<img [src]="img" width="200" (error)="imgError()" (load)="imgLoaded()" *ngIf="img; else elseImg"/>
+<!--else-->
+<ng-template #elseImg>
+  <img [src]="imageDefault" width="200" />
+</ng-template>
