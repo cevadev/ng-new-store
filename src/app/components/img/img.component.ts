@@ -20,6 +20,12 @@ export class ImgComponent
   @Input() img: string = '';
   imageDefault: string = './assets/images/bike.jpg';
 
+  //** ngDestroy & ngSetInput Sample */
+  counter: number = 0;
+  // guardamos la referencia que retorna el metodo setInterval()
+  counterFn: number | undefined;
+  //** END ngDestroy & ngSetInput Sample */
+
   // enviando un evento al componente padre
   // EventEmitter envia strings
   @Output() loaded = new EventEmitter<string>();
@@ -32,6 +38,15 @@ export class ImgComponent
   // se ejecuta antes de render()
   ngOnInit(): void {
     console.info(`app-img component ngOnInit imgValue=> ${this.img}`);
+
+    //** ngDestroy & ngSetInput Sample */
+    // corremos una tarea q se ejcuta por cada segundo y como es algo asincrono lo hacemos en el ngOnInit()
+    // este evento setInterval() se queda activo aun cuando el componente app-img es destruido
+    this.counterFn = window.setInterval(() => {
+      this.counter += 1; // cada segundo sumamos 1 a counter
+      console.info(`run counter ${this.counter}`);
+    }, 1000);
+    //** ngDestroy & ngSetInput Sample */
   }
 
   // se ejecuta antes del render()
@@ -46,6 +61,8 @@ export class ImgComponent
 
   ngOnDestroy() {
     console.info('app-img component ngOnDestroy');
+    // limpiamos el evento del setInterval()
+    window.clearInterval(this.counterFn);
   }
 
   imgError() {

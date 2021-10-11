@@ -11,10 +11,14 @@
 <p>
   <input type="text" [(ngModel)]="imgParent" />
 </p>
+<button type="button" (click)="toggleImg()">Toggle Img</button>
+
+<p>{{showImg}}</p>
 <!--enviamos el valor dinamicamente (property binding) del imgParent al componente app-img
   ($event) nos permite recibir informacion que envia el evento del componente hijo
 -->
-<app-img (loaded)="onLoaded($event)" [img]="imgParent"></app-img>
+<!--si showImg es true mostramos cargamos el component app-img, la imagen de lo contrario la ocultamos-->
+<app-img *ngIf="showImg" (loaded)="onLoaded($event)" [img]="imgParent"></app-img>
 <!--iteramos el array de objets product y del padre app.component le pasamos al hijo product.component cada product-->
 <!--[product] se refiere a la variable product que es de tipo @Input-->
 <app-product [product]="product" *ngFor="let product of products; index as p"></app-product>

@@ -1,3 +1,4 @@
+<p>{{counter}}</p>
 <!--verificamos si la imagen viene vacia *ngIf-->
 <img [src]="img" width="200" (error)="imgError()" (load)="imgLoaded()" *ngIf="img; else elseImg"/>
 <!--else-->

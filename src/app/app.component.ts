@@ -10,6 +10,7 @@ import { Product } from '../models/product.model';
 export class AppComponent {
   title = 'new-store';
   imgParent = '';
+  showImg = true;
 
   products: Product[] = [
     {
@@ -41,5 +42,9 @@ export class AppComponent {
   // el evento del componente hijo envia la url de la imagen
   onLoaded(img: string) {
     console.info(`Log from Parent ${img}`);
+  }
+
+  toggleImg() {
+    this.showImg = !this.showImg;
   }
 }
