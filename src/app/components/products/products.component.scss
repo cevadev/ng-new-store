@@ -1,0 +1,27 @@
+.products--grid {
+  // mobile first
+  display: flex;
+  flex-direction: column;
+}
+
+// Tablet dimension
+// ancho minimo & ancho maximo
+@media screen and (min-width: 40em) and (max-width: 63.9em) {
+  // cuando se accede desde una tablet cambiamos a grid container
+  .products--grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    // espacio entre productos
+    grid-gap: 15px;
+  }
+}
+
+// Web dimension
+@media screen and (min-width: 64em) {
+  .products--grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    // espacio entre productos
+    grid-gap: 15px;
+  }
+}

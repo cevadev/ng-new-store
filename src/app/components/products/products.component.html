@@ -1,1 +1,5 @@
-<p>products works!</p>
+<div class="products--grid">
+  <!--iteramos el array de objets product y del padre app.component le pasamos al hijo product.component cada product-->
+  <!--[product] se refiere a la variable product que es de tipo @Input-->
+  <app-product [product]="product" *ngFor="let product of products; index as p"></app-product>
+</div>
