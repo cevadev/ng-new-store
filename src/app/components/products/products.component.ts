@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Product } from '../../../models/product.model';
+import { StoreService } from '../../services/store.service';
 
 @Component({
   selector: 'app-products',
@@ -8,6 +9,8 @@ import { Product } from '../../../models/product.model';
   styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent implements OnInit {
+  myShoppingCart: Product[] = [];
+  total = 0;
   products: Product[] = [
     {
       id: '1',
@@ -35,7 +38,17 @@ export class ProductsComponent implements OnInit {
     },
   ];
 
-  constructor() {}
+  // injectamos el service store
+  constructor(private storeService: StoreService) {
+    // obtenemos la lista actual de productos en el carrito
+    this.myShoppingCart = this.storeService.getShoppingCart();
+  }
 
   ngOnInit(): void {}
+
+  // evento que escucha cuando el componente hijo app-product emite un evento con un Product
+  onAddToShoppingCart(product: Product) {
+    this.storeService.addProduct(product);
+    this.total = this.storeService.getTotal();
+  }
 }

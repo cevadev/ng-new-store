@@ -1,5 +1,13 @@
+<p>La cantidad {{ myShoppingCart.length }}</p>
+<p>Total: ${{ total }}</p>
 <div class="products--grid">
   <!--iteramos el array de objets product y del padre app.component le pasamos al hijo product.component cada product-->
   <!--[product] se refiere a la variable product que es de tipo @Input-->
-  <app-product [product]="product" *ngFor="let product of products; index as p"></app-product>
+  <!--este componente padre escucha el evento (addedProduct) emitido desde el hijo add-product-->
+  <!--capturamos el evento con $event-->
+  <app-product
+    [product]="product"
+    *ngFor="let product of products; index as p"
+    (addedProduct)="onAddToShoppingCart($event)"
+  ></app-product>
 </div>
