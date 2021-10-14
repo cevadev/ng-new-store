@@ -1,5 +1,10 @@
 <p>La cantidad {{ myShoppingCart.length }}</p>
 <p>Total: ${{ total }}</p>
+<!--using Angular Pipes-->
+<p>Short format date: {{ today | date: "short" }}</p>
+<p>yyyyddMM format date: {{ date | date: "yyyy.dd.MM" }}</p>
+<p>Pipe time ago format: {{ date | timeAgo }}</p>
+
 <div class="products--grid">
   <!--iteramos el array de objets product y del padre app.component le pasamos al hijo product.component cada product-->
   <!--[product] se refiere a la variable product que es de tipo @Input-->

@@ -16,6 +16,11 @@ export class ProductsComponent implements OnInit {
   total = 0;
   products: Product[] = [];
 
+  /** Date Pipe */
+  today = new Date();
+  date = new Date(2021, 1, 21);
+  /** Date Pipe */
+
   // injectamos el service store
   constructor(
     private storeService: StoreService,
