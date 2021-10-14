@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Product } from '../../../models/product.model';
+
+// services
 import { StoreService } from '../../services/store.service';
+import { ProductsService } from '../../services/products.service';
 
 @Component({
   selector: 'app-products',
@@ -11,40 +14,24 @@ import { StoreService } from '../../services/store.service';
 export class ProductsComponent implements OnInit {
   myShoppingCart: Product[] = [];
   total = 0;
-  products: Product[] = [
-    {
-      id: '1',
-      name: 'EL mejor juguete',
-      price: 565,
-      image: './assets/images/toy.jpg',
-    },
-    {
-      id: '2',
-      name: 'Bicicleta casi nueva',
-      price: 356,
-      image: './assets/images/bike.jpg',
-    },
-    {
-      id: '3',
-      name: 'Colleción de albumnes',
-      price: 34,
-      image: './assets/images/album.jpg',
-    },
-    {
-      id: '4',
-      name: 'Mis libros',
-      price: 23,
-      image: './assets/images/books.jpg',
-    },
-  ];
+  products: Product[] = [];
 
   // injectamos el service store
-  constructor(private storeService: StoreService) {
+  constructor(
+    private storeService: StoreService,
+    private productsService: ProductsService
+  ) {
     // obtenemos la lista actual de productos en el carrito
     this.myShoppingCart = this.storeService.getShoppingCart();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // ngOnInit es el metodo ideal para hacer peticiones
+    // angular maneja el patron Observable por lo que para obtener los datos del api utilizamos subscribe
+    this.productsService.getAllProducts().subscribe((data) => {
+      this.products = data;
+    });
+  }
 
   // evento que escucha cuando el componente hijo app-product emite un evento con un Product
   onAddToShoppingCart(product: Product) {

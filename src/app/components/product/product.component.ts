@@ -11,9 +11,11 @@ export class ProductComponent implements OnInit {
   @Input() product: Product = {
     // definimos el estado inicial
     id: '',
-    name: '',
+    title: '',
     price: 0,
     image: '',
+    category: '',
+    description: '',
   };
 
   // comunicacion hacia el componente padre app-product to app-products con el event addedProduct que transmite
