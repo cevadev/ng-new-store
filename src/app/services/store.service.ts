@@ -1,4 +1,7 @@
 import { Injectable } from '@angular/core';
+/** state management */
+import { BehaviorSubject } from 'rxjs';
+/** state management */
 
 import { Product } from '../../models/product.model';
 
@@ -7,6 +10,13 @@ import { Product } from '../../models/product.model';
 })
 export class StoreService {
   private myShoppingCart: Product[] = [];
+  /** Observable pattern */
+  private myCart = new BehaviorSubject<Product[]>([]); // contiene un array de productos con un state inicial vacio
+
+  // creamos el subscriber
+  myCart$ = this.myCart.asObservable();
+
+  /** Observable pattern */
 
   constructor() {}
 
@@ -16,6 +26,7 @@ export class StoreService {
 
   addProduct(product: Product) {
     this.myShoppingCart.push(product);
+    this.myCart.next(this.myShoppingCart);
   }
 
   getTotal() {
